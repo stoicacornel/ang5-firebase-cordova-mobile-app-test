@@ -1,0 +1,32 @@
+<div style="text-align:center; padding: 20px 0">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <h4 class="customMarginSubtitle">Below you can find a list of all the existing ToDolists in the database.</h4>
+  <h4 class="customMarginSubtitle">Select one to Create, Update or Delete elements from it.</h4>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-6 offset-3">
+      <li class="noBullets" *ngFor="let item of items">
+        <h2 [routerLink]="['/list']" [queryParams]="{id: item.id}" class="individualList">{{item.id}}</h2>
+      </li>
+
+      <div class="col-6 offset-3" style="text-align: center">
+        <button type="button" class="btn btn-secondary" *ngIf="!showListName" (click)="showListName = !showListName">Create a new list</button>
+      </div>
+
+      <div class="col-12" *ngIf="showListName">
+        <div class="input-group mb-3">
+          <input #listId type="text" class="form-control" placeholder="Name of the To Do List" aria-label="Name of the To Do List">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="createList(listId.value);showListName = !showListName">Create a new list!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

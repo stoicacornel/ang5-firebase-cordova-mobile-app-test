@@ -1,0 +1,35 @@
+<div style="text-align:center; padding: 20px 0">
+  <h1>
+    {{list.id}}
+  </h1>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-6 offset-3">
+        <li class="noBullets" *ngFor="let task of tasks">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <input type="checkbox" id="{{tasks.indexOf(task)}}">
+              </div>
+            </div>
+            <input disabled="{{true}}" id="{{'input' + tasks.indexOf(task)}}" type="text" class="form-control" [value]="task">
+            <input hidden="{{true}}" id="{{'hiddenInput' + tasks.indexOf(task)}}" type="text" [value]="">
+            <button id="{{'btnEdit' + tasks.indexOf(task)}}" hidden="{{visible}}" type="button" class="btn btn-secondary" (click)="enableInput(tasks.indexOf(task), task)">Edit Task</button>
+            <button id="{{'btnSave' + tasks.indexOf(task)}}" hidden="{{!visible}}" type="button" class="btn btn-warning" (click)="modifyProperty(tasks.indexOf(task))">Save</button>
+            <button id="{{'btnCancel' + tasks.indexOf(task)}}" hidden="{{!visible}}" type="button" class="btn btn-secondary" (click)="disableInput(tasks.indexOf(task)); getBackupValue(tasks.indexOf(task))">Cancel</button>
+          </div>
+        </li>
+
+        <div class="input-group mb-3">
+          <input #listId id="listId" type="text" class="form-control" placeholder="New Task" aria-label="Name of the Task">
+          <div class="input-group-append">
+            <button type="button" class="btn btn-success" (click)="addTask(listId.value)">Add new task</button>
+          </div>
+        </div>
+        <button type="button" class="btn btn-danger" (click)="deleteTasks()">Delete Selected Tasks</button>
+        <button type="button" class="btn btn-info" (click)="deleteTasks()">Go Back</button>
+      </div>
+    </div>
+  </div>
+</div>
